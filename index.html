@@ -1,0 +1,956 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rolzie - Portfolio</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "SF Pro Display", -apple-system, BlinkMacSystemFont,
+          sans-serif;
+        background: #0a0a0a;
+        color: #ffffff;
+        overflow-x: hidden;
+      }
+
+      /* Remove custom cursor styles - use default cursor */
+
+      /* Background animation */
+      .bg-animation {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        opacity: 0.1;
+      }
+
+      .particle {
+        position: absolute;
+        width: 2px;
+        height: 2px;
+        background: #ff6b6b;
+        border-radius: 50%;
+        animation: float 20s infinite linear;
+      }
+
+      @keyframes float {
+        0% {
+          transform: translateY(100vh) rotate(0deg);
+          opacity: 0;
+        }
+        10% {
+          opacity: 1;
+        }
+        90% {
+          opacity: 1;
+        }
+        100% {
+          transform: translateY(-100vh) rotate(360deg);
+          opacity: 0;
+        }
+      }
+
+      /* Navigation */
+      nav {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        padding: 20px 50px;
+        background: rgba(10, 10, 10, 0.9);
+        backdrop-filter: blur(10px);
+        z-index: 1000;
+        transition: all 0.3s ease;
+      }
+
+      nav.scrolled {
+        padding: 15px 50px;
+        background: rgba(10, 10, 10, 0.95);
+      }
+
+      .nav-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .logo {
+        font-size: 24px;
+        font-weight: 700;
+        background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .nav-links {
+        display: flex;
+        list-style: none;
+        gap: 30px;
+        align-items: center;
+      }
+
+      .nav-links a {
+        color: #ffffff;
+        text-decoration: none;
+        font-weight: 500;
+        transition: all 0.3s ease;
+        position: relative;
+      }
+
+      .nav-links a::after {
+        content: "";
+        position: absolute;
+        bottom: -5px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+        transition: width 0.3s ease;
+      }
+
+      .nav-links a:hover::after {
+        width: 100%;
+      }
+
+      .lang-switch {
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 20px;
+        padding: 8px 15px;
+        color: white;
+        text-decoration: none;
+        font-size: 14px;
+        transition: all 0.3s ease;
+      }
+
+      .lang-switch:hover {
+        background: rgba(255, 107, 107, 0.2);
+        transform: translateY(-2px);
+      }
+
+      /* Hero Section */
+      .hero {
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        position: relative;
+        background: radial-gradient(
+          ellipse at center,
+          rgba(255, 107, 107, 0.1) 0%,
+          transparent 70%
+        );
+      }
+
+      .hero-content {
+        max-width: 900px;
+        padding: 0 20px;
+      }
+
+      .hero h1 {
+        font-size: 4rem;
+        margin-bottom: 20px;
+        background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        animation: fadeInUp 1s ease 0.5s both;
+      }
+
+      .hero p {
+        font-size: 1.2rem;
+        margin-bottom: 40px;
+        opacity: 0.8;
+        animation: fadeInUp 1s ease 0.7s both;
+        line-height: 1.6;
+      }
+
+      .cta-buttons {
+        display: flex;
+        gap: 20px;
+        justify-content: center;
+        flex-wrap: wrap;
+        animation: fadeInUp 1s ease 0.9s both;
+      }
+
+      .btn {
+        padding: 15px 30px;
+        border: none;
+        border-radius: 50px;
+        font-size: 16px;
+        font-weight: 600;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+        cursor: pointer;
+        display: inline-block;
+      }
+
+      .btn-primary {
+        background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+        color: white;
+      }
+
+      .btn-secondary {
+        background: transparent;
+        color: white;
+        border: 2px solid rgba(255, 255, 255, 0.3);
+      }
+
+      .btn::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(255, 255, 255, 0.2),
+          transparent
+        );
+        transition: left 0.5s ease;
+      }
+
+      .btn:hover::before {
+        left: 100%;
+      }
+
+      .btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 25px rgba(255, 107, 107, 0.3);
+      }
+
+      /* Section Styles */
+      .section {
+        padding: 100px 50px;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .section h2 {
+        font-size: 2.5rem;
+        margin-bottom: 50px;
+        text-align: center;
+        background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .about-grid {
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+        gap: 50px;
+        align-items: center;
+      }
+
+      .profile-image {
+        width: 300px;
+        height: 300px;
+        border-radius: 50%;
+        background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+        padding: 4px;
+        animation: rotate 20s linear infinite;
+      }
+
+      .profile-image img {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        object-fit: cover;
+        background: #1a1a1a;
+      }
+
+      @keyframes rotate {
+        from {
+          transform: rotate(0deg);
+        }
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      .about-text {
+        font-size: 1.1rem;
+        line-height: 1.8;
+        opacity: 0.9;
+      }
+
+      .skills {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 30px;
+        margin-top: 50px;
+      }
+
+      .skill-card {
+        background: rgba(255, 255, 255, 0.05);
+        padding: 30px;
+        border-radius: 20px;
+        text-align: center;
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        transition: all 0.3s ease;
+      }
+
+      .skill-card:hover {
+        transform: translateY(-10px);
+        background: rgba(255, 107, 107, 0.1);
+      }
+
+      .skill-icon {
+        font-size: 3rem;
+        margin-bottom: 20px;
+        background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      /* Experience Timeline */
+      .experience-timeline {
+        margin-top: 50px;
+      }
+
+      .timeline-item {
+        background: rgba(255, 255, 255, 0.05);
+        padding: 30px;
+        border-radius: 20px;
+        margin-bottom: 30px;
+        border-left: 4px solid;
+        border-image: linear-gradient(45deg, #ff6b6b, #4ecdc4) 1;
+        backdrop-filter: blur(10px);
+      }
+
+      .timeline-date {
+        color: #4ecdc4;
+        font-weight: 600;
+        font-size: 1.1rem;
+        margin-bottom: 10px;
+      }
+
+      .timeline-title {
+        color: #ff6b6b;
+        font-size: 1.3rem;
+        font-weight: 700;
+        margin-bottom: 10px;
+      }
+
+      .timeline-company {
+        color: #ffffff;
+        font-size: 1.1rem;
+        margin-bottom: 15px;
+        opacity: 0.8;
+      }
+
+      .timeline-description {
+        color: #ffffff;
+        opacity: 0.9;
+        line-height: 1.6;
+      }
+
+      .timeline-description ul {
+        margin-left: 20px;
+        margin-top: 10px;
+      }
+
+      .timeline-description li {
+        margin-bottom: 8px;
+      }
+
+      /* Projects Section */
+      .projects-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 30px;
+        margin-top: 50px;
+      }
+
+      .project-card {
+        background: rgba(255, 255, 255, 0.05);
+        padding: 30px;
+        border-radius: 20px;
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        transition: all 0.3s ease;
+      }
+
+      .project-card:hover {
+        transform: translateY(-10px);
+        background: rgba(255, 107, 107, 0.1);
+        border-color: rgba(255, 107, 107, 0.3);
+      }
+
+      .project-header {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        margin-bottom: 20px;
+      }
+
+      .project-icon {
+        font-size: 2.5rem;
+      }
+
+      .project-title {
+        color: #ff6b6b;
+        font-size: 1.3rem;
+        font-weight: 700;
+      }
+
+      .project-date {
+        color: #4ecdc4;
+        font-size: 0.9rem;
+        margin-bottom: 15px;
+      }
+
+      .project-description {
+        color: #ffffff;
+        opacity: 0.9;
+        line-height: 1.6;
+      }
+
+      /* Resume Actions */
+      .resume-actions {
+        display: flex;
+        gap: 20px;
+        justify-content: center;
+        margin-top: 40px;
+        flex-wrap: wrap;
+      }
+
+      /* Links Section */
+      .links-section {
+        background: linear-gradient(
+          135deg,
+          rgba(255, 107, 107, 0.1),
+          rgba(78, 205, 196, 0.1)
+        );
+        border-radius: 30px;
+        padding: 60px;
+        text-align: center;
+        margin: 50px 0;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .links-section::before {
+        content: "";
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: conic-gradient(
+          from 0deg,
+          transparent,
+          rgba(255, 107, 107, 0.1),
+          transparent
+        );
+        animation: rotate 10s linear infinite;
+        z-index: -1;
+      }
+
+      .links-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 30px;
+        margin-top: 40px;
+      }
+
+      .link-card {
+        background: rgba(255, 255, 255, 0.05);
+        padding: 30px;
+        border-radius: 20px;
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        transition: all 0.3s ease;
+        text-decoration: none;
+        color: white;
+        display: block;
+      }
+
+      .link-card:hover {
+        transform: translateY(-5px);
+        background: rgba(255, 107, 107, 0.15);
+        border-color: rgba(255, 107, 107, 0.3);
+      }
+
+      .link-icon {
+        font-size: 3rem;
+        margin-bottom: 15px;
+      }
+
+      .link-title {
+        font-size: 1.3rem;
+        font-weight: 700;
+        margin-bottom: 10px;
+        color: #ff6b6b;
+      }
+
+      .link-description {
+        opacity: 0.8;
+        font-size: 0.95rem;
+      }
+
+      /* Animations */
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .fade-in {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: all 0.6s ease;
+      }
+
+      .fade-in.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* Responsive Design */
+      @media (max-width: 768px) {
+        .hero h1 {
+          font-size: 2.5rem;
+        }
+
+        .hero p {
+          font-size: 1rem;
+        }
+
+        .about-grid {
+          grid-template-columns: 1fr;
+          text-align: center;
+        }
+
+        .profile-image {
+          margin: 0 auto;
+        }
+
+        .nav-links {
+          gap: 15px;
+        }
+
+        .nav-links a {
+          font-size: 14px;
+        }
+
+        .cta-buttons {
+          flex-direction: column;
+          align-items: center;
+        }
+
+        .section {
+          padding: 50px 20px;
+        }
+
+        .resume-actions {
+          flex-direction: column;
+          align-items: center;
+        }
+
+        nav {
+          padding: 15px 20px;
+        }
+
+        .links-section {
+          padding: 40px 20px;
+        }
+
+        .projects-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      /* Scrollbar */
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+
+      ::-webkit-scrollbar-track {
+        background: #1a1a1a;
+      }
+
+      ::-webkit-scrollbar-thumb {
+        background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+        border-radius: 4px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Background animation -->
+    <div class="bg-animation" id="bgAnimation"></div>
+
+    <!-- Navigation -->
+    <nav id="navbar">
+      <div class="nav-container">
+        <div class="logo">Rolzie</div>
+        <ul class="nav-links">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#resume">Experience</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#links">Links</a></li>
+          <li><a href="index_cn.html" class="lang-switch">中文</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+      <div class="hero-content">
+        <h1>Hello, I'm Rolzie</h1>
+        <p>
+          CS @ Imperial College London<br />
+          I build reliable, scalable software systems and enjoy solving complex
+          problems at the intersection of technology and real-world
+          applications. Experience across backend systems, data-driven
+          applications, and FinTech projects.
+        </p>
+
+        <div class="cta-buttons">
+          <a href="#about" class="btn btn-primary">Learn More</a>
+          <a href="#resume" class="btn btn-secondary">View Experience</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section fade-in">
+      <h2>About Me</h2>
+      <div class="about-grid">
+        <div class="profile-image">
+          <img
+            src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjMwMCIgdmlld0JveD0iMCAwIDMwMCAzMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIiBmaWxsPSIjMUExQTFBIiByeD0iMTUwIi8+CjxjaXJjbGUgY3g9IjE1MCIgY3k9IjEyMCIgcj0iNDAiIGZpbGw9IiM0RUNEQUI4Ii8+CjxwYXRoIGQ9Ik0xMDAgMjMwQzEwMCAyMDAgMTIwIDE4MCAxNTAgMTgwQzE4MCAxODAgMjAwIDIwMCAyMDAgMjMwVjI1MEgxMDBWMjMwWiIgZmlsbD0iIzRFQ0RDNCIvPgo8L3N2Zz4K"
+            alt="Profile"
+          />
+        </div>
+        <div class="about-text">
+          <p>
+            I'm a Computer Science student at Imperial College London with a
+            strong interest in software engineering. I enjoy building reliable,
+            scalable software systems and solving complex problems through clean
+            architecture, thoughtful engineering, and data-driven approaches.
+          </p>
+          <p>
+            My experience spans backend development, data-intensive
+            applications, and real-time systems. I am particularly interested in
+            automated trading systems, trading infrastructure, and other
+            performance-critical applications, and I enjoy learning how such
+            systems are designed, implemented, and scaled in practice.
+          </p>
+          <p>
+            Alongside my background in software engineering, I have applied
+            these interests to FinTech- and trading-related projects and
+            academic work, focusing on automation, data analysis and system
+            reliability. Through hands-on experience at HSBC and trading
+            academies, I have developed practical skills in technical projects,
+            I have developed practical skills in Python, Java and modern
+            development frameworks. I am motivated to build impactful software
+            systems on a large scale.
+          </p>
+        </div>
+      </div>
+
+      <div class="skills">
+        <div class="skill-card fade-in">
+          <div class="skill-icon">⚡</div>
+          <h3>Trading Systems</h3>
+          <p>Order management, automated trading, and market data processing</p>
+        </div>
+        <div class="skill-card fade-in">
+          <div class="skill-icon">📊</div>
+          <h3>Quantitative Analysis</h3>
+          <p>
+            Statistical modeling, factor analysis, and backtesting frameworks
+          </p>
+        </div>
+        <div class="skill-card fade-in">
+          <div class="skill-icon">💹</div>
+          <h3>Options Trading</h3>
+          <p>Greeks analysis, volatility strategies, and risk management</p>
+        </div>
+        <div class="skill-card fade-in">
+          <div class="skill-icon">🖥️</div>
+          <h3>Software Development</h3>
+          <p>Java, Python, Spring Boot, React, and API development</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="resume" class="section fade-in">
+      <h2>Professional Experience</h2>
+
+      <div class="experience-timeline">
+        <div class="timeline-item fade-in">
+          <div class="timeline-date">Aug 2025 – Oct 2025</div>
+          <div class="timeline-title">Software Development Intern</div>
+          <div class="timeline-company">HSBC</div>
+          <div class="timeline-description">
+            <ul>
+              <li>
+                Developed testing utilities with Java and Spring Boot, including
+                a mock API to simulate request–response workflows and a module
+                to generate secure HTTPS headers by retrieving real-time tokens
+                from the database and injecting them into outbound API calls
+              </li>
+              <li>
+                Implemented automated unit and integration tests (JUnit,
+                Postman) for Spring Boot services and basic load tests to ensure
+                stable performance under higher request volumes, reducing manual
+                workload by 90% and improving reliability
+              </li>
+              <li>
+                Supported system integration and issue investigation by working
+                with developers and testers to diagnose API and configuration
+                issues across environments
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="timeline-item fade-in">
+          <div class="timeline-date">May 2025 – June 2025</div>
+          <div class="timeline-title">Optiver Trading Academy</div>
+          <div class="timeline-company">Imperial College London</div>
+          <div class="timeline-description">
+            <ul>
+              <li>
+                Participated in Optiver's options trading academy; applied
+                market microstructure, arbitrage strategies, and Greeks analysis
+                in simulated trading environments
+              </li>
+              <li>
+                Designed a delta-neutral portfolio combining cross-exchange
+                arbitrage (30% allocation) and volatility trading strategies,
+                actively managing gamma and vega exposure
+              </li>
+              <li>
+                Awarded <strong>Best Trading Strategy</strong> among 30+ peers
+                for superior risk-adjusted returns through systematic approach
+                to options pricing and execution
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="timeline-item fade-in">
+          <div class="timeline-date">
+            Aug 2024 – Oct 2024; Jul 2025 – Aug 2025
+          </div>
+          <div class="timeline-title">Trading Analyst Intern</div>
+          <div class="timeline-company">SHUOFUND INVESTMENT (China)</div>
+          <div class="timeline-description">
+            <ul>
+              <li>
+                Analysed financial markets and asset classes, using Python to
+                process and validate datasets in support of trading and
+                investment decisions
+              </li>
+              <li>
+                Worked closely with senior traders on futures and portfolio
+                strategies, translating trading ideas into data-driven analyses
+                and actionable insights
+              </li>
+              <li>
+                Explored factor-based models and backtesting workflows, focusing
+                on data quality, statistical assumptions, and result
+                interpretation for systematic trading strategies
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="resume-actions">
+        <a
+          href="https://drive.google.com/file/d/1noF2jcEyVukCm2lmOaVjXH0lksecbybU/view?usp=sharing"
+          target="_blank"
+          class="btn btn-primary"
+        >
+          📄 View Full Resume
+        </a>
+        <a href="CV_new.pdf" download class="btn btn-secondary">
+          💾 Download CV
+        </a>
+      </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="section fade-in">
+      <h2>Projects</h2>
+
+      <div class="projects-grid">
+        <div class="project-card fade-in">
+          <div class="project-header">
+            <div class="project-icon">♻️</div>
+            <div>
+              <div class="project-title">Re@Imperial App</div>
+              <div class="project-date">May 2025 – June 2025</div>
+            </div>
+          </div>
+          <div class="project-description">
+            Developed a React-based web app with Supabase backend to tackle
+            campus recycling challenges by encouraging reusable container use.
+            Applied human-centred design and agile methods from initial research
+            through to live demo, focusing on user experience and sustainable
+            behavior change.
+          </div>
+        </div>
+
+        <div class="project-card fade-in">
+          <div class="project-header">
+            <div class="project-icon">📈</div>
+            <div>
+              <div class="project-title">
+                Multiple Linear Regression - Bank Valuation
+              </div>
+              <div class="project-date">Summer 2025</div>
+            </div>
+          </div>
+          <div class="project-description">
+            Built a multiple linear regression model for Chinese A-share banks
+            following Damodaran's valuation framework. Selected 20 large banks,
+            used PB as the dependent variable, and tested factors like ROE,
+            dividend, NPL ratio, beta, PE, and Tier-1 capital ratio in Python.
+            After data cleaning and correlation analysis, identified optimal 2-3
+            factor combinations with strong adjusted R² values. Created a tool
+            to input bank metrics and flag potential mispricing by comparing
+            fair PB estimates to market values.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Links Section -->
+    <section id="links" class="section fade-in">
+      <div class="links-section">
+        <h2 style="margin-bottom: 20px">Connect With Me</h2>
+        <p style="font-size: 1.1rem; margin-bottom: 40px; opacity: 0.9">
+          Explore my work, trading insights, and technical projects
+        </p>
+
+        <div class="links-grid">
+          <a
+            href="https://rolzieinvestment.blogspot.com/"
+            target="_blank"
+            class="link-card"
+          >
+            <div class="link-icon">📝</div>
+            <div class="link-title">Investment Blog</div>
+            <div class="link-description">
+              Market analysis, trading strategies, and financial insights
+            </div>
+          </a>
+
+          <a
+            href="https://github.com/rolzie-7"
+            target="_blank"
+            class="link-card"
+          >
+            <div class="link-icon">💻</div>
+            <div class="link-title">GitHub</div>
+            <div class="link-description">
+              Code repositories, projects, and technical contributions
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <script>
+      // Background particles animation
+      function createParticles() {
+        const bgAnimation = document.getElementById("bgAnimation");
+        for (let i = 0; i < 50; i++) {
+          const particle = document.createElement("div");
+          particle.classList.add("particle");
+          particle.style.left = Math.random() * 100 + "%";
+          particle.style.animationDelay = Math.random() * 20 + "s";
+          particle.style.animationDuration = Math.random() * 10 + 10 + "s";
+          bgAnimation.appendChild(particle);
+        }
+      }
+
+      // Scroll animation handler
+      function handleScroll() {
+        const navbar = document.getElementById("navbar");
+        const scrolled = window.pageYOffset;
+
+        if (scrolled > 100) {
+          navbar.classList.add("scrolled");
+        } else {
+          navbar.classList.remove("scrolled");
+        }
+
+        // Fade-in animation for sections
+        const fadeElements = document.querySelectorAll(".fade-in");
+        fadeElements.forEach((element) => {
+          const elementTop = element.offsetTop;
+          const elementVisible = 150;
+
+          if (scrolled > elementTop - window.innerHeight + elementVisible) {
+            element.classList.add("visible");
+          }
+        });
+      }
+
+      // Smooth scrolling for anchor links
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute("href"));
+          if (target) {
+            target.scrollIntoView({
+              behavior: "smooth",
+              block: "start",
+            });
+          }
+        });
+      });
+
+      // Initialize on page load
+      document.addEventListener("DOMContentLoaded", () => {
+        createParticles();
+        window.addEventListener("scroll", handleScroll);
+
+        // Initial animation check
+        setTimeout(() => {
+          handleScroll();
+        }, 100);
+      });
+
+      // Keyboard navigation support
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "ArrowDown") {
+          window.scrollBy({ top: 100, behavior: "smooth" });
+        } else if (e.key === "ArrowUp") {
+          window.scrollBy({ top: -100, behavior: "smooth" });
+        }
+      });
+    </script>
+  </body>
+</html>
