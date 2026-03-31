@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Re@Imperial – Rolzie</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        font-family: "SF Pro Display", -apple-system, BlinkMacSystemFont,
+          sans-serif;
+        background: #0a0a0a;
+        color: #fff;
+        line-height: 1.6;
+      }
+
+      a {
+        color: inherit;
+      }
+
+      nav {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        padding: 20px 50px;
+        background: rgba(10, 10, 10, 0.92);
+        backdrop-filter: blur(12px);
+        z-index: 1000;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      }
+
+      .nav-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .logo {
+        font-size: 24px;
+        font-weight: 700;
+        background: linear-gradient(45deg, #8fd66b, #4ecdc4);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        text-decoration: none;
+      }
+
+      .back-btn {
+        background: rgba(255, 255, 255, 0.08);
+        border: 1px solid rgba(255, 255, 255, 0.16);
+        border-radius: 999px;
+        padding: 10px 20px;
+        color: white;
+        text-decoration: none;
+        font-size: 14px;
+        transition: all 0.3s ease;
+      }
+
+      .back-btn:hover {
+        background: rgba(143, 214, 107, 0.16);
+        transform: translateY(-2px);
+        border-color: rgba(143, 214, 107, 0.35);
+      }
+
+      .hero {
+        padding: 160px 50px 70px;
+        max-width: 950px;
+        margin: 0 auto;
+      }
+
+      .project-icon-large {
+        font-size: 4rem;
+        margin-bottom: 20px;
+      }
+
+      .hero h1 {
+        font-size: 3.2rem;
+        font-weight: 700;
+        line-height: 1.1;
+        background: linear-gradient(45deg, #8fd66b, #4ecdc4);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        margin-bottom: 16px;
+      }
+
+      .hero .date {
+        color: #8fd66b;
+        font-size: 1rem;
+        font-weight: 600;
+        margin-bottom: 22px;
+      }
+
+      .hero .subtitle {
+        color: rgba(255, 255, 255, 0.82);
+        font-size: 1.08rem;
+        line-height: 1.9;
+        max-width: 780px;
+      }
+
+      .hero-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 14px;
+        margin-top: 28px;
+      }
+
+      .primary-btn,
+      .secondary-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        border-radius: 999px;
+        padding: 12px 22px;
+        font-size: 0.95rem;
+        font-weight: 600;
+        transition: all 0.3s ease;
+      }
+
+      .primary-btn {
+        background: linear-gradient(45deg, #8fd66b, #4ecdc4);
+        color: #0a0a0a;
+      }
+
+      .primary-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 25px rgba(143, 214, 107, 0.18);
+      }
+
+      .secondary-btn {
+        background: rgba(255, 255, 255, 0.06);
+        color: #fff;
+        border: 1px solid rgba(255, 255, 255, 0.14);
+      }
+
+      .secondary-btn:hover {
+        transform: translateY(-2px);
+        background: rgba(255, 255, 255, 0.1);
+      }
+
+      .content {
+        max-width: 950px;
+        margin: 0 auto;
+        padding: 0 50px 100px;
+      }
+
+      .section-block {
+        background: rgba(255, 255, 255, 0.045);
+        border-radius: 22px;
+        padding: 35px;
+        margin-bottom: 28px;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-left: 4px solid #8fd66b;
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.18);
+      }
+
+      .section-block h2 {
+        font-size: 1.3rem;
+        color: #8fd66b;
+        margin-bottom: 16px;
+        font-weight: 700;
+      }
+
+      .section-block h3 {
+        font-size: 1.02rem;
+        color: #4ecdc4;
+        margin-top: 18px;
+        margin-bottom: 10px;
+      }
+
+      .section-block p,
+      .section-block li {
+        color: rgba(255, 255, 255, 0.9);
+        line-height: 1.85;
+        font-size: 1rem;
+      }
+
+      .section-block ul {
+        margin-left: 20px;
+        margin-top: 10px;
+      }
+
+      .section-block li {
+        margin-bottom: 12px;
+      }
+
+      .muted {
+        color: rgba(255, 255, 255, 0.68);
+      }
+
+      .highlight-box {
+        margin-top: 18px;
+        padding: 18px 20px;
+        border-radius: 16px;
+        background: rgba(143, 214, 107, 0.08);
+        border: 1px solid rgba(143, 214, 107, 0.18);
+      }
+
+      .highlight-box strong {
+        color: #8fd66b;
+      }
+
+      .feature-list {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 16px;
+        margin-top: 16px;
+      }
+
+      .feature-card {
+        padding: 18px;
+        border-radius: 16px;
+        background: rgba(255, 255, 255, 0.035);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+      }
+
+      .feature-card h3 {
+        margin: 0 0 10px;
+      }
+
+      .screenshot-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 22px;
+        margin-top: 18px;
+      }
+
+      .screenshot-row-two {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 18px;
+      }
+
+      .screenshot-card {
+        background: rgba(255, 255, 255, 0.04);
+        border-radius: 18px;
+        overflow: hidden;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        transition: transform 0.3s ease, border-color 0.3s ease;
+      }
+
+      .screenshot-card:hover {
+        transform: translateY(-4px);
+        border-color: rgba(78, 205, 196, 0.25);
+      }
+
+      .screenshot-frame {
+        width: 100%;
+        background: #111;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 14px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      }
+
+      .screenshot-frame img {
+        width: 100%;
+        display: block;
+        object-fit: contain;
+        border-radius: 10px;
+        background: #0d0d0d;
+      }
+
+      .screenshot-card.wide .screenshot-frame {
+        min-height: 280px;
+      }
+
+      .screenshot-card.wide .screenshot-frame img {
+        max-height: 420px;
+      }
+      .screenshot-card.poster .screenshot-frame {
+        min-height: 420px;
+      }
+
+      .screenshot-card.standard .screenshot-frame {
+        min-height: 320px;
+      }
+
+      .screenshot-caption {
+        padding: 18px 20px 20px;
+      }
+
+      .screenshot-caption h3 {
+        font-size: 1rem;
+        color: #4ecdc4;
+        margin-bottom: 8px;
+      }
+
+      .screenshot-caption p {
+        font-size: 0.95rem;
+        color: rgba(255, 255, 255, 0.78);
+        line-height: 1.7;
+      }
+
+      .tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 10px;
+      }
+
+      .tag {
+        background: rgba(78, 205, 196, 0.14);
+        border: 1px solid rgba(78, 205, 196, 0.28);
+        border-radius: 999px;
+        padding: 7px 15px;
+        font-size: 0.85rem;
+        color: #4ecdc4;
+      }
+
+      .footer-note {
+        text-align: center;
+        margin-top: 10px;
+        color: rgba(255, 255, 255, 0.55);
+        font-size: 0.92rem;
+      }
+
+      @media (max-width: 768px) {
+        nav {
+          padding: 15px 20px;
+        }
+
+        .hero {
+          padding: 120px 20px 56px;
+        }
+
+        .hero h1 {
+          font-size: 2.15rem;
+        }
+
+        .content {
+          padding: 0 20px 80px;
+        }
+
+        .section-block {
+          padding: 24px;
+        }
+
+        .feature-list,
+        .screenshot-row-two {
+          grid-template-columns: 1fr;
+        }
+
+        .screenshot-card.poster .screenshot-frame,
+        .screenshot-card.standard .screenshot-frame {
+          min-height: auto;
+        }
+
+        .hero-actions {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <div class="nav-container">
+        <a href="../../index.html" class="logo">Rolzie</a>
+        <a href="../../index.html#projects" class="back-btn"
+          >← Back to Projects</a
+        >
+      </div>
+    </nav>
+
+    <div class="hero">
+      <div class="project-icon-large">♻️</div>
+      <h1>Re@Imperial</h1>
+      <div class="date">May2025- June2025</div>
+      <p class="subtitle">
+        A reusable-container rewards platform designed to reduce single-use
+        waste at Imperial by encouraging students and staff to bring reusable
+        cups, containers, and cutlery in exchange for points and redeemable
+        rewards.
+      </p>
+
+      <div class="hero-actions">
+        <a href="#screenshots" class="primary-btn">View Screenshots</a>
+        <a href="#tech" class="secondary-btn">See Tech Stack</a>
+      </div>
+    </div>
+
+    <div class="content">
+      <div class="section-block">
+        <h2>Overview</h2>
+        <p>
+          Re@Imperial is a sustainability-focused mobile platform built around a
+          simple idea: reward reuse. The system lets users earn points when they
+          bring reusable items to campus food outlets, then redeem those points
+          for rewards through a structured student, cashier, and admin flow.
+        </p>
+
+        <div class="highlight-box">
+          <p>
+            <strong>Core concept:</strong> reduce disposable waste by making
+            environmentally responsible behaviour visible, trackable, and
+            rewarding.
+          </p>
+        </div>
+      </div>
+
+      <div class="section-block">
+        <h2>The Problem</h2>
+        <p>
+          The presentation identified a clear behavioural gap: many students
+          continued using single-use containers because reuse felt less
+          convenient, there was little incentive, and the disposal process was
+          often poorly understood. The project reframed that challenge as a
+          motivation and interaction problem, asking how students and staff
+          could be encouraged to reduce disposable waste at Imperial.
+          :contentReference[oaicite:1]{index=1}
+        </p>
+      </div>
+
+      <div class="section-block">
+        <h2>Core Functionality</h2>
+        <div class="feature-list">
+          <div class="feature-card">
+            <h3>User QR Workflow</h3>
+            <p>
+              Each user has a personal QR code page used to collect points after
+              showing reusable items at participating outlets.
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <h3>Rewards & Redemption</h3>
+            <p>
+              Users can browse available rewards, toggle selections, and redeem
+              points in a way that is clearer and less intrusive than earlier
+              iterations.
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <h3>Cashier Scanner</h3>
+            <p>
+              Cashiers can scan codes and process point updates more
+              efficiently, with later iterations simplifying confirmation steps
+              and enabling manual point editing when needed.
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <h3>Leaderboard & Social Motivation</h3>
+            <p>
+              The app also includes a friends leaderboard to make reuse more
+              engaging and socially visible rather than purely transactional.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      
+
+      <div class="section-block">
+        <h2>Technical Highlights</h2>
+
+        <h3>Cross-Platform Frontend</h3>
+        <p>
+          The frontend was built with <strong>React Native with Expo</strong>,
+          supporting cross-platform development, rapid iteration, and hot
+          reloading during testing. :contentReference[oaicite:2]{index=2}
+        </p>
+
+        <h3>Backend & Database</h3>
+        <p>
+          The project used <strong>Supabase (PostgreSQL)</strong> as an
+          all-in-one backend and database layer, with automatic API generation
+          supporting the application data model.
+          :contentReference[oaicite:3]{index=3}
+        </p>
+
+        <h3>Role-Based Architecture</h3>
+        <p>
+          The architecture was split across student/staff, cashier, and admin
+          interactions. Student-side flows retrieved rewards, friends, user
+          information, and points; cashier flows updated points via
+          <strong>expo-camera</strong>; and admin flows handled
+          GET/PUT/POST/DELETE actions on users and rewards.
+          :contentReference[oaicite:4]{index=4}
+        </p>
+
+        <h3>CI/CD</h3>
+        <p>
+          The presentation also lists <strong>GitHub Actions</strong> as part of
+          the CI/CD workflow. :contentReference[oaicite:5]{index=5}
+        </p>
+      </div>
+
+      <div class="section-block">
+        <h2>Impact</h2>
+        <p>
+          The projected user impact presented for the concept was substantial:
+          the system could reduce waste by up to
+          <strong>72 tonnes annually</strong> and potentially save Imperial up
+          to <strong>£568,025 per year</strong>, while also making sustainable
+          behaviour feel more rewarding and more socially engaging.
+          :contentReference[oaicite:6]{index=6}
+        </p>
+
+        <div class="highlight-box">
+          <p>
+            <strong>Design lesson:</strong> one of the strongest aspects of this
+            project was iterative refinement based on direct feedback from both
+            students and cashiers.
+          </p>
+        </div>
+      </div>
+
+      <div class="section-block">
+        <h2>Future Work</h2>
+        <p>
+          The team identified several natural next steps: integrating with
+          current Imperial cashier systems, expanding reward partnerships with
+          Taste Imperial, and growing adoption across campus.
+          :contentReference[oaicite:7]{index=7}
+        </p>
+      </div>
+
+      <div class="section-block" id="tech">
+        <h2>Tech Stack</h2>
+        <div class="tags">
+          <span class="tag">React Native</span>
+          <span class="tag">Expo</span>
+          <span class="tag">Supabase</span>
+          <span class="tag">PostgreSQL</span>
+          <span class="tag">expo-camera</span>
+          <span class="tag">GitHub Actions</span>
+        </div>
+      </div>
+
+      <div class="section-block" id="screenshots">
+        <h2>Screenshots</h2>
+        <p class="muted">
+          These images highlight the visual identity of the platform and the key
+          user-facing and cashier-facing flows.
+        </p>
+
+        <div class="screenshot-card wide">
+            <div class="screenshot-frame">
+              <img
+                src="images/user.png"
+                alt="Re@Imperial homepage and user page combined view"
+              />
+            </div>
+            <div class="screenshot-caption">
+              <h3>Homepage + User Page</h3>
+              <p>
+                A combined horizontal view showing the onboarding guidance alongside the
+                main user page, making the points collection flow easier to understand at
+                a glance.
+              </p>
+            </div>
+          </div>
+          </div>
+
+          <div class="screenshot-row-two">
+            <div class="screenshot-card standard">
+              <div class="screenshot-frame">
+                <img src="images/redeem.png" alt="Re@Imperial reward page" />
+              </div>
+              <div class="screenshot-caption">
+                <h3>Reward Redemption</h3>
+                <p>
+                  The reward interface supports browsing, selection, and
+                  redemption while also communicating reward details more
+                  clearly.
+                </p>
+              </div>
+            </div>
+
+            <div class="screenshot-card standard">
+              <div class="screenshot-frame">
+                <img
+                  src="images/cashier.png"
+                  alt="Re@Imperial cashier scanner"
+                />
+              </div>
+              <div class="screenshot-caption">
+                <h3>Cashier Scanner</h3>
+                <p>
+                  The cashier-facing tool supports point collection and
+                  redemption, with iterations focused on reducing friction and
+                  improving operational control.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <p class="footer-note">
+        A sustainability-focused mobile platform for rewarding reuse on campus.
+      </p>
+    </div>
+  </body>
+</html>

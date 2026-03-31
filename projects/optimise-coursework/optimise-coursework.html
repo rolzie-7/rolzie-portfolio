@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Optimise My Coursework – Rolzie</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        font-family: "SF Pro Display", -apple-system, BlinkMacSystemFont,
+          sans-serif;
+        background: #0a0a0a;
+        color: #fff;
+        line-height: 1.6;
+      }
+
+      a {
+        color: inherit;
+      }
+
+      nav {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        padding: 20px 50px;
+        background: rgba(10, 10, 10, 0.92);
+        backdrop-filter: blur(12px);
+        z-index: 1000;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      }
+
+      .nav-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .logo {
+        font-size: 24px;
+        font-weight: 700;
+        background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        text-decoration: none;
+      }
+
+      .back-btn {
+        background: rgba(255, 255, 255, 0.08);
+        border: 1px solid rgba(255, 255, 255, 0.16);
+        border-radius: 999px;
+        padding: 10px 20px;
+        color: white;
+        text-decoration: none;
+        font-size: 14px;
+        transition: all 0.3s ease;
+      }
+
+      .back-btn:hover {
+        background: rgba(255, 107, 107, 0.18);
+        transform: translateY(-2px);
+        border-color: rgba(255, 107, 107, 0.35);
+      }
+
+      .hero {
+        padding: 160px 50px 70px;
+        max-width: 950px;
+        margin: 0 auto;
+      }
+
+      .project-icon-large {
+        font-size: 4rem;
+        margin-bottom: 20px;
+      }
+
+      .hero h1 {
+        font-size: 3.2rem;
+        font-weight: 700;
+        line-height: 1.1;
+        background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        margin-bottom: 16px;
+      }
+
+      .hero .date {
+        color: #4ecdc4;
+        font-size: 1rem;
+        font-weight: 600;
+        margin-bottom: 22px;
+      }
+
+      .hero .subtitle {
+        color: rgba(255, 255, 255, 0.82);
+        font-size: 1.08rem;
+        line-height: 1.9;
+        max-width: 780px;
+      }
+
+      .hero-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 14px;
+        margin-top: 28px;
+      }
+
+      .primary-btn,
+      .secondary-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        border-radius: 999px;
+        padding: 12px 22px;
+        font-size: 0.95rem;
+        font-weight: 600;
+        transition: all 0.3s ease;
+      }
+
+      .primary-btn {
+        background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+        color: #0a0a0a;
+      }
+
+      .primary-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 25px rgba(78, 205, 196, 0.18);
+      }
+
+      .secondary-btn {
+        background: rgba(255, 255, 255, 0.06);
+        color: #fff;
+        border: 1px solid rgba(255, 255, 255, 0.14);
+      }
+
+      .secondary-btn:hover {
+        transform: translateY(-2px);
+        background: rgba(255, 255, 255, 0.1);
+      }
+
+      .content {
+        max-width: 950px;
+        margin: 0 auto;
+        padding: 0 50px 100px;
+      }
+
+      .section-block {
+        background: rgba(255, 255, 255, 0.045);
+        border-radius: 22px;
+        padding: 35px;
+        margin-bottom: 28px;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-left: 4px solid #ff6b6b;
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.18);
+      }
+
+      .section-block h2 {
+        font-size: 1.3rem;
+        color: #ff6b6b;
+        margin-bottom: 16px;
+        font-weight: 700;
+      }
+
+      .section-block h3 {
+        font-size: 1.02rem;
+        color: #4ecdc4;
+        margin-top: 18px;
+        margin-bottom: 10px;
+      }
+
+      .section-block p,
+      .section-block li {
+        color: rgba(255, 255, 255, 0.9);
+        line-height: 1.85;
+        font-size: 1rem;
+      }
+
+      .section-block ul {
+        margin-left: 20px;
+        margin-top: 10px;
+      }
+
+      .section-block li {
+        margin-bottom: 12px;
+      }
+
+      .muted {
+        color: rgba(255, 255, 255, 0.7);
+      }
+
+      .highlight-box {
+        margin-top: 18px;
+        padding: 18px 20px;
+        border-radius: 16px;
+        background: rgba(78, 205, 196, 0.08);
+        border: 1px solid rgba(78, 205, 196, 0.18);
+      }
+
+      .highlight-box strong {
+        color: #4ecdc4;
+      }
+
+      .demo-link {
+        display: inline-block;
+        color: #4ecdc4;
+        text-decoration: none;
+        font-weight: 600;
+        word-break: break-word;
+      }
+
+      .demo-link:hover {
+        text-decoration: underline;
+      }
+
+      .credential-list {
+        list-style: none;
+        margin-left: 0 !important;
+        margin-top: 10px;
+      }
+
+      .credential-list li {
+        margin-bottom: 10px;
+      }
+
+      .credential-pill {
+        display: inline-block;
+        padding: 5px 12px;
+        border-radius: 999px;
+        background: rgba(255, 107, 107, 0.12);
+        border: 1px solid rgba(255, 107, 107, 0.24);
+        color: #ffb0b0;
+        font-size: 0.9rem;
+        margin-left: 8px;
+      }
+
+      .screenshot-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 22px;
+        margin-top: 18px;
+      }
+
+      .screenshot-row-two {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 18px;
+      }
+
+      .screenshot-card {
+        background: rgba(255, 255, 255, 0.04);
+        border-radius: 18px;
+        overflow: hidden;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        transition: transform 0.3s ease, border-color 0.3s ease;
+      }
+
+      .screenshot-card:hover {
+        transform: translateY(-4px);
+        border-color: rgba(78, 205, 196, 0.25);
+      }
+
+      .screenshot-frame {
+        width: 100%;
+        background: #111;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 14px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      }
+
+      .screenshot-frame img {
+        width: 100%;
+        display: block;
+        object-fit: contain;
+        border-radius: 10px;
+        background: #0d0d0d;
+      }
+
+      .screenshot-card.tall .screenshot-frame {
+        min-height: 520px;
+      }
+
+      .screenshot-card.standard .screenshot-frame {
+        min-height: 300px;
+      }
+
+      .screenshot-caption {
+        padding: 18px 20px 20px;
+      }
+
+      .screenshot-caption h3 {
+        font-size: 1rem;
+        color: #4ecdc4;
+        margin-bottom: 8px;
+      }
+
+      .screenshot-caption p {
+        font-size: 0.95rem;
+        color: rgba(255, 255, 255, 0.78);
+        line-height: 1.7;
+      }
+
+      .feature-list {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 16px;
+        margin-top: 16px;
+      }
+
+      .feature-card {
+        padding: 18px;
+        border-radius: 16px;
+        background: rgba(255, 255, 255, 0.035);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+      }
+
+      .feature-card h3 {
+        margin: 0 0 10px;
+      }
+
+      .tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 10px;
+      }
+
+      .tag {
+        background: rgba(78, 205, 196, 0.14);
+        border: 1px solid rgba(78, 205, 196, 0.28);
+        border-radius: 999px;
+        padding: 7px 15px;
+        font-size: 0.85rem;
+        color: #4ecdc4;
+      }
+
+      .footer-note {
+        text-align: center;
+        margin-top: 10px;
+        color: rgba(255, 255, 255, 0.55);
+        font-size: 0.92rem;
+      }
+
+      @media (max-width: 768px) {
+        nav {
+          padding: 15px 20px;
+        }
+
+        .hero {
+          padding: 120px 20px 56px;
+        }
+
+        .hero h1 {
+          font-size: 2.15rem;
+        }
+
+        .content {
+          padding: 0 20px 80px;
+        }
+
+        .section-block {
+          padding: 24px;
+        }
+
+        .screenshot-grid,
+        .screenshot-row-two,
+        .feature-list {
+          grid-template-columns: 1fr;
+        }
+
+        .screenshot-card.tall .screenshot-frame,
+        .screenshot-card.standard .screenshot-frame {
+          min-height: auto;
+        }
+
+        .hero-actions {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <div class="nav-container">
+        <a href="../../index.html" class="logo">Rolzie</a>
+        <a href="../../index.html" class="back-btn">← Back to Home Page</a>
+      </div>
+    </nav>
+
+    <div class="hero">
+      <div class="project-icon-large">🗓️</div>
+      <h1>Optimise My Coursework</h1>
+      <div class="date">Jan2026 - Mar2026</div>
+      <p class="subtitle">
+        A coursework scheduling platform that helps students transform deadlines
+        into structured, manageable study plans through configurable scheduling
+        strategies, visual workload analytics, and calendar-based planning.
+      </p>
+
+      <div class="hero-actions">
+        <a
+          href="https://scientia.decesare.dev"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="primary-btn"
+        >
+          View Live Demo
+        </a>
+        <a href="#screenshots" class="secondary-btn">Explore Screenshots</a>
+      </div>
+    </div>
+
+    <div class="content">
+      <div class="section-block">
+        <h2>Overview</h2>
+        <p>
+          Optimise My Coursework is a full-stack scheduling tool designed to
+          help students plan coursework more realistically across the academic
+          term. Instead of only seeing assignment deadlines, users can generate
+          an optimised schedule based on their preferred working pattern,
+          scheduling strategy, and personal buffer preferences.
+        </p>
+
+        <div class="highlight-box">
+          <p>
+            <strong>Main idea:</strong> break large coursework tasks into a
+            practical day-by-day plan, then present the result in both visual
+            and calendar-based formats that students can immediately act on.
+          </p>
+        </div>
+      </div>
+
+      <div class="section-block">
+        <h2>The Problem</h2>
+        <p>
+          Students often know <em>what</em> they need to complete, but not
+          <em>how</em> to distribute that workload effectively over time.
+          Coursework deadlines tend to cluster, and without structure, it is
+          easy to leave work too late or create unsustainable spikes in effort.
+          We wanted to build a system that turns deadline data into a realistic,
+          personalised study schedule.
+        </p>
+      </div>
+
+      <div class="section-block">
+        <h2>Core Functionality</h2>
+        <div class="feature-list">
+          <div class="feature-card">
+            <h3>Scheduling Strategy Selection</h3>
+            <p>
+              Users can choose between different scheduling approaches such as
+              Earliest Deadline First, MinMax for balancing daily load, or a
+              Late scheduler depending on how they prefer to organise their
+              work.
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <h3>Working Hours Configuration</h3>
+            <p>
+              Students can define their available working window, allowing the
+              generated schedule to reflect realistic daily study capacity
+              rather than assuming unlimited time.
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <h3>Buffer-Based Deadline Protection</h3>
+            <p>
+              A custom buffer feature lets users artificially bring deadlines
+              forward by several days, creating a safety margin and reducing the
+              risk of last-minute completion.
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <h3>Dual Visualisation Output</h3>
+            <p>
+              The generated schedule is displayed through both a workload chart
+              and an interactive calendar view, helping students understand
+              their plan at both a high level and a day-by-day level.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="section-block">
+        <h2>How It Works</h2>
+        <p>
+          The platform is powered by a FastAPI backend and a React frontend. The
+          API accepts two major inputs: a coursework array containing task
+          information such as start date, deadline, and expected completion
+          time, and a config object that stores optional user preferences such
+          as strategy, working hours, and buffer.
+        </p>
+
+        <p>
+          Whenever a user changes these settings in the interface, the frontend
+          dynamically updates the JSON payload sent to the backend. The backend
+          then computes an optimised <strong>ScheduleResult</strong>, which is
+          rendered immediately in the UI.
+        </p>
+
+        <div class="highlight-box">
+          <p>
+            <strong>Example:</strong> if the user changes the buffer from 0 to
+            2, the system recalculates a plan that finishes two days earlier
+            than the actual deadline.
+          </p>
+        </div>
+      </div>
+
+
+      <div class="section-block">
+        <h2>Technical Highlights</h2>
+
+        <h3>Responsive Workload Visualisation</h3>
+        <p>
+          We used Chart.js to render the workload chart as a stacked bar chart.
+          To improve presentation quality across devices, we also implemented a
+          custom mathematical hook that dynamically adjusts the chart aspect
+          ratio, preventing awkward stretching on different screen sizes.
+        </p>
+
+        <h3>Customised Calendar Experience</h3>
+        <p>
+          For the calendar interface, we integrated
+          <strong>@fullcalendar/react</strong> and extended it with custom
+          behaviour. The generated schedule is transformed into calendar events,
+          and event hover states display custom HTML tooltips showing exact task
+          durations.
+        </p>
+
+        <h3>Mobile-Responsive UX</h3>
+        <p>
+          Using custom React hooks for mobile detection, the calendar
+          automatically adapts to smaller screens by hiding heavier desktop
+          views and defaulting to touch-friendly day or list layouts.
+        </p>
+
+        <h3>Calendar Export</h3>
+        <p>
+          We also implemented an export feature that converts the generated
+          schedule into a standards-compliant <strong>.ics</strong> file,
+          allowing students to import their optimised schedule directly into
+          Outlook or Google Calendar.
+        </p>
+      </div>
+
+      <div class="section-block">
+        <h2>Live Demo</h2>
+        <p>
+          A public demonstration build is available for interactive exploration.
+          Visitors can test the scheduling interface directly and also inspect
+          the API documentation that powers the system.
+        </p>
+
+        <p style="margin-top: 14px">
+          <a
+            href="https://scientia.decesare.dev"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="demo-link"
+          >
+            Public demo: scientia.decesare.dev
+          </a>
+        </p>
+
+        <ul class="credential-list">
+          <li>
+            Username:
+            <span class="credential-pill">hpotter</span>
+          </li>
+          <li>
+            Password:
+            <span class="credential-pill">any string</span>
+          </li>
+        </ul>
+
+        <div class="highlight-box">
+          <p>
+            <strong>Tip:</strong> try changing the scheduling strategy, working
+            hours, or buffer value, then compare how the workload graph and
+            calendar output update.
+          </p>
+        </div>
+      </div>
+
+      <div class="section-block">
+        <h2>Impact</h2>
+        <p>
+          This project turns abstract deadline information into a personalised
+          and actionable study plan. By combining configurable scheduling logic
+          with intuitive visual outputs, it helps students manage coursework
+          more proactively, reduce deadline pressure, and integrate academic
+          planning with their wider personal schedule.
+        </p>
+      </div>
+
+      <div class="section-block">
+        <h2>Tech Stack</h2>
+        <div class="tags">
+          <span class="tag">React</span>
+          <span class="tag">TypeScript / JavaScript</span>
+          <span class="tag">FastAPI</span>
+          <span class="tag">Chart.js</span>
+          <span class="tag">@fullcalendar/react</span>
+          <span class="tag">Tippy.js</span>
+          <span class="tag">ICS Export</span>
+        </div>
+      </div>
+
+      
+      <div class="section-block" id="screenshots">
+        <h2>Screenshots</h2>
+        <p class="muted">
+          These screenshots show the main interaction points and outputs of the
+          platform.
+        </p>
+        <div class="screenshot-grid">
+          <div class="screenshot-card tall">
+            <div class="screenshot-frame">
+              <img src="images/scheduler.png" alt="Scheduler choice interface" />
+            </div>
+            <div class="screenshot-caption">
+              <h3>Scheduler Choice</h3>
+              <p>
+                Users can choose from multiple scheduling strategies, allowing the
+                system to adapt to different workload preferences and study habits.
+              </p>
+            </div>
+          </div>
+        
+          <div class="screenshot-card tall">
+            <div class="screenshot-frame">
+              <img src="images/working-hour.png" alt="Working hours configuration" />
+            </div>
+            <div class="screenshot-caption">
+              <h3>Working Hours & Buffer Setup</h3>
+              <p>
+                The configuration panel allows students to define realistic working
+                hours and add a safety buffer that brings deadlines forward.
+              </p>
+            </div>
+          </div>
+        
+          <div class="screenshot-row-two">
+            <div class="screenshot-card standard">
+              <div class="screenshot-frame">
+                <img src="images/chartview.png" alt="Workload bar chart view" />
+              </div>
+              <div class="screenshot-caption">
+                <h3>Workload Graph</h3>
+                <p>
+                  Built using Chart.js, the stacked bar chart transforms raw schedule
+                  data into an immediate overview of required effort across the term.
+                </p>
+              </div>
+            </div>
+        
+            <div class="screenshot-card standard">
+              <div class="screenshot-frame">
+                <img src="images/calendarview.png" alt="Calendar schedule view" />
+              </div>
+              <div class="screenshot-caption">
+                <h3>Calendar View</h3>
+                <p>
+                  The interactive calendar converts the schedule output into readable
+                  events, helping students inspect workload at the daily level.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+         
+        </div>
+      </div>
+
+      <p class="footer-note">
+        A scheduling platform for turning coursework deadlines into realistic,
+        visual, and exportable study plans.
+      </p>
+    </div>
+  </body>
+</html>

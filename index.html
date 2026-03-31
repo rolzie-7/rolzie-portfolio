@@ -375,9 +375,15 @@
       /* Projects Section */
       .projects-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        grid-template-columns: repeat(2, 1fr);
         gap: 30px;
         margin-top: 50px;
+      }
+
+      @media (max-width: 768px) {
+        .projects-grid {
+          grid-template-columns: 1fr;
+        }
       }
 
       .project-card {
@@ -422,6 +428,17 @@
         color: #ffffff;
         opacity: 0.9;
         line-height: 1.6;
+      }
+      .project-link-hint {
+        margin-top: 15px;
+        font-size: 0.9rem;
+        color: #4ecdc4;
+        font-weight: 600;
+        transition: color 0.3s ease;
+      }
+
+      .project-card:hover .project-link-hint {
+        color: #ff6b6b;
       }
 
       /* Resume Actions */
@@ -790,7 +807,55 @@
       <h2>Projects</h2>
 
       <div class="projects-grid">
-        <div class="project-card fade-in">
+        <a
+          href="projects\optimise-coursework\optimise-coursework.html"
+          class="project-card fade-in"
+          style="text-decoration: none; color: inherit"
+        >
+          <div class="project-header">
+            <div class="project-icon">📅</div>
+            <div>
+              <div class="project-title">
+                Course Selection Visualisation Tool
+              </div>
+              <div class="project-date">Jan 2026- Mar 2026</div>
+            </div>
+          </div>
+          <div class="project-description">
+            Developed “Optimise My Coursework,” an extension to the department’s
+            Scientia website that lets students select modules and visualise
+            expected workload in both chart and calendar formats, with
+            configurable schedulers and personalised time settings to support
+            better module choice.
+          </div>
+          <div class="project-link-hint">View Details →</div>
+        </a>
+
+        <a
+          href="https://github.com/rolzie-7/xau-xag-strategy-monitor"
+          class="project-card fade-in"
+          style="text-decoration: none; color: inherit"
+        >
+          <div class="project-header">
+            <div class="project-icon">💰</div>
+            <div>
+              <div class="project-title">Metals Strategy Monitor</div>
+              <div class="project-date">Dec 2025- Jan 2026</div>
+            </div>
+          </div>
+          <div class="project-description">
+            Python-based research and backtesting system plus a Streamlit
+            live-monitoring dashboard for XAUUSD and XAGUSD. Generates manual
+            trade tickets and tracks positions with a persistent SQLite
+            database.
+          </div>
+          <div class="project-link-hint">View Details →</div>
+        </a>
+        <a
+          href="projects\re-imperial\re-imperial.html"
+          class="project-card fade-in"
+          style="text-decoration: none; color: inherit"
+        >
           <div class="project-header">
             <div class="project-icon">♻️</div>
             <div>
@@ -802,35 +867,35 @@
             Developed a React-based web app with Supabase backend to tackle
             campus recycling challenges by encouraging reusable container use.
             Applied human-centred design and agile methods from initial research
-            through to live demo, focusing on user experience and sustainable
-            behavior change.
+            through to live demo.
           </div>
-        </div>
+          <div class="project-link-hint">View Details →</div>
+        </a>
 
-        <div class="project-card fade-in">
+        <a
+          href="https://rolzieinvestment.blogspot.com/"
+          class="project-card fade-in"
+          style="text-decoration: none; color: inherit"
+        >
           <div class="project-header">
             <div class="project-icon">📈</div>
             <div>
               <div class="project-title">
-                Multiple Linear Regression - Bank Valuation
+                Multiple Linear Regression – Bank Valuation
               </div>
               <div class="project-date">Summer 2025</div>
             </div>
           </div>
           <div class="project-description">
             Built a multiple linear regression model for Chinese A-share banks
-            following Damodaran's valuation framework. Selected 20 large banks,
-            used PB as the dependent variable, and tested factors like ROE,
-            dividend, NPL ratio, beta, PE, and Tier-1 capital ratio in Python.
-            After data cleaning and correlation analysis, identified optimal 2-3
-            factor combinations with strong adjusted R² values. Created a tool
-            to input bank metrics and flag potential mispricing by comparing
-            fair PB estimates to market values.
+            following Damodaran's valuation framework. Identified optimal factor
+            combinations to flag potential mispricing by comparing fair PB
+            estimates to market values.
           </div>
-        </div>
+          <div class="project-link-hint">View Details →</div>
+        </a>
       </div>
     </section>
-
     <!-- Links Section -->
     <section id="links" class="section fade-in">
       <div class="links-section">
