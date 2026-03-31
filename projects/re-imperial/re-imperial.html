@@ -421,7 +421,6 @@
           often poorly understood. The project reframed that challenge as a
           motivation and interaction problem, asking how students and staff
           could be encouraged to reduce disposable waste at Imperial.
-          :contentReference[oaicite:1]{index=1}
         </p>
       </div>
 
@@ -468,36 +467,34 @@
 
       <div class="section-block">
         <h2>Technical Highlights</h2>
-
+      
         <h3>Cross-Platform Frontend</h3>
         <p>
-          The frontend was built with <strong>React Native with Expo</strong>,
-          supporting cross-platform development, rapid iteration, and hot
-          reloading during testing. :contentReference[oaicite:2]{index=2}
+          The app was built with <strong>React Native and Expo</strong>, enabling
+          cross-platform development, rapid prototyping, and fast iteration through
+          hot reloading during testing.
         </p>
-
+      
         <h3>Backend & Database</h3>
         <p>
-          The project used <strong>Supabase (PostgreSQL)</strong> as an
-          all-in-one backend and database layer, with automatic API generation
-          supporting the application data model.
-          :contentReference[oaicite:3]{index=3}
+          We used <strong>Supabase (PostgreSQL)</strong> as an integrated backend and
+          database solution, which simplified data management and provided automatic
+          API generation for core application features.
         </p>
-
+      
         <h3>Role-Based Architecture</h3>
         <p>
-          The architecture was split across student/staff, cashier, and admin
-          interactions. Student-side flows retrieved rewards, friends, user
-          information, and points; cashier flows updated points via
-          <strong>expo-camera</strong>; and admin flows handled
-          GET/PUT/POST/DELETE actions on users and rewards.
-          :contentReference[oaicite:4]{index=4}
+          The system was designed around three roles: students, cashiers, and admins.
+          Student flows handled rewards, friends, profile information, and points;
+          cashier flows processed QR-based point collection and redemption via
+          <strong>expo-camera</strong>; and admin flows supported management of users
+          and rewards.
         </p>
-
+      
         <h3>CI/CD</h3>
         <p>
-          The presentation also lists <strong>GitHub Actions</strong> as part of
-          the CI/CD workflow. :contentReference[oaicite:5]{index=5}
+          We also incorporated <strong>GitHub Actions</strong> into the development
+          workflow to support continuous integration and deployment.
         </p>
       </div>
 
